@@ -27,7 +27,9 @@
 .toolbar h1,
 .section-heading h2,
 .hero-copy h2,
-.info-strip h3 {
+.info-strip h3,
+.profile-header h1,
+.preview-content h1 {
   margin: 0;
 }
 
@@ -66,7 +68,10 @@
 }
 
 .signin-actions,
-.account-bar {
+.account-bar,
+.profile-actions,
+.preview-actions,
+.preview-topbar {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -74,12 +79,18 @@
 
 .primary-button,
 .secondary-button,
-.tab-button {
+.tab-button,
+.media-card__click {
   border: 0;
   border-radius: 999px;
-  padding: 10px 16px;
   cursor: pointer;
   transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.primary-button,
+.secondary-button,
+.tab-button {
+  padding: 10px 16px;
 }
 
 .primary-button {
@@ -95,7 +106,8 @@
 
 .primary-button:hover,
 .secondary-button:hover,
-.tab-button:hover {
+.tab-button:hover,
+.media-card__click:hover {
   transform: translateY(-1px);
 }
 
@@ -218,7 +230,8 @@
   color: #b8b8b8;
 }
 
-.hero-banner {
+.hero-banner,
+.preview-hero {
   min-height: 360px;
   display: flex;
   align-items: flex-end;
@@ -230,6 +243,14 @@
   overflow: hidden;
 }
 
+.preview-hero {
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
+
 .loading-banner,
 .empty-banner,
 .summary-card,
@@ -238,12 +259,20 @@
 .media-card,
 .card-skeleton,
 .empty-state,
-.error-box {
+.error-box,
+.profile-header {
   background: rgba(255, 255, 255, 0.05);
 }
 
-.hero-copy {
-  max-width: 560px;
+.hero-copy,
+.preview-content {
+  max-width: 700px;
+}
+
+.preview-plot,
+.hero-plot {
+  margin: 0 0 12px;
+  color: #e7e7e7;
 }
 
 .meta-row {
@@ -254,11 +283,6 @@
   color: #d4d4d4;
 }
 
-.hero-plot {
-  margin: 0 0 12px;
-  color: #e7e7e7;
-}
-
 .summary-strip {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -266,7 +290,8 @@
   margin-bottom: 26px;
 }
 
-.summary-card {
+.summary-card,
+.profile-header {
   padding: 18px;
   border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -295,7 +320,8 @@
 }
 
 .search-view,
-.info-strip {
+.info-strip,
+.profile-header {
   margin-bottom: 24px;
   padding: 20px;
   border-radius: 20px;
@@ -322,10 +348,23 @@
 
 .media-card,
 .card-skeleton {
-  min-height: 410px;
+  min-height: 450px;
   border-radius: 18px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.media-card__click {
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  border-radius: 0;
+  text-align: left;
+}
+
+.media-card__actions {
+  padding: 0 14px 14px;
 }
 
 .card-skeleton {
@@ -436,9 +475,11 @@
     align-items: flex-start;
   }
 
-  .account-bar {
+  .account-bar,
+  .preview-topbar {
     width: 100%;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
 
   .summary-strip,
@@ -454,16 +495,15 @@
     padding-right: 20px;
   }
 
-  .toolbar {
+  .toolbar,
+  .profile-actions,
+  .preview-actions,
+  .signin-actions {
     flex-direction: column;
+    align-items: stretch;
   }
 
   .search-shell {
     width: 100%;
-  }
-
-  .signin-actions {
-    flex-direction: column;
-    align-items: stretch;
   }
 }

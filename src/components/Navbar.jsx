@@ -1,4 +1,4 @@
-function Navbar({ tabs, activeTab, onTabChange, userName, onSignOut }) {
+function Navbar({ tabs, activeTab, onTabChange, userName, onSignOut, onOpenProfile }) {
   return (
     <header className="navbar">
       <div className="brand-block">
@@ -20,6 +20,9 @@ function Navbar({ tabs, activeTab, onTabChange, userName, onSignOut }) {
       </nav>
 
       <div className="account-bar">
+        <button type="button" className="secondary-button compact-button" onClick={onOpenProfile}>
+          Profile
+        </button>
         <span className="user-chip">Hi, {userName}</span>
         <button type="button" className="secondary-button compact-button" onClick={onSignOut}>
           Sign out

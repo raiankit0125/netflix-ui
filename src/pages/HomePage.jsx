@@ -80,7 +80,7 @@ function getTopShow(items) {
   return topItem;
 }
 
-function HomePage({ user, onSignOut }) {
+function HomePage({ user, watchlist, onSignOut, onOpenProfile, onOpenPreview, onToggleWatchlist }) {
   const [activeTab, setActiveTab] = useState('Home');
   const [catalog, setCatalog] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -142,6 +142,7 @@ function HomePage({ user, onSignOut }) {
         onTabChange={setActiveTab}
         userName={user.name}
         onSignOut={onSignOut}
+        onOpenProfile={onOpenProfile}
       />
 
       <section className="page-content screen-panel">
@@ -150,7 +151,7 @@ function HomePage({ user, onSignOut }) {
             <p className="eyebrow">Short-form media storefront</p>
             <h1>Browse up to 10,000 TV shows, movies and video games</h1>
             <p className="toolbar-copy">
-              Data is loaded from the IMDb REST API and rendered in small batches for smoother scrolling.
+              Click any thumbnail to open a movie preview screen, then add titles to your watchlist.
             </p>
           </div>
 
@@ -171,7 +172,14 @@ function HomePage({ user, onSignOut }) {
               </div>
               <span className="status-pill">{filteredItems.length.toLocaleString()} matches</span>
             </div>
-            <MediaGrid items={filteredItems} loading={loading} emptyMessage="No search results found." />
+            <MediaGrid
+              items={filteredItems}
+              loading={loading}
+              emptyMessage="No search results found."
+              onOpenItem={onOpenPreview}
+              onToggleWatchlist={onToggleWatchlist}
+              watchlist={watchlist}
+            />
           </section>
         ) : (
           <>
@@ -183,8 +191,8 @@ function HomePage({ user, onSignOut }) {
                 <strong>{loadedCount.toLocaleString()}</strong>
               </article>
               <article className="summary-card">
-                <span className="summary-label">Target selection</span>
-                <strong>{totalCount.toLocaleString()}</strong>
+                <span className="summary-label">Watchlist</span>
+                <strong>{watchlist.length.toLocaleString()}</strong>
               </article>
               <article className="summary-card">
                 <span className="summary-label">Active category</span>
@@ -202,7 +210,14 @@ function HomePage({ user, onSignOut }) {
 
             {error ? <div className="error-box">{error}</div> : null}
 
-            <MediaGrid items={filteredItems} loading={loading} emptyMessage="No titles found for this category." />
+            <MediaGrid
+              items={filteredItems}
+              loading={loading}
+              emptyMessage="No titles found for this category."
+              onOpenItem={onOpenPreview}
+              onToggleWatchlist={onToggleWatchlist}
+              watchlist={watchlist}
+            />
           </>
         )}
 

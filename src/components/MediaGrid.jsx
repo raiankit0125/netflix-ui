@@ -1,7 +1,14 @@
 import { useInfiniteItems } from '../hooks/useInfiniteItems';
 import MediaCard from './MediaCard';
 
-function MediaGrid({ items, loading, emptyMessage = 'No titles found.' }) {
+function MediaGrid({
+  items,
+  loading,
+  emptyMessage = 'No titles found.',
+  onOpenItem,
+  onToggleWatchlist,
+  watchlist = [],
+}) {
   const { visibleItems, sentinelRef } = useInfiniteItems(items, {
     initialCount: 24,
     step: 24,
@@ -25,7 +32,13 @@ function MediaGrid({ items, loading, emptyMessage = 'No titles found.' }) {
     <>
       <section className="grid-layout">
         {visibleItems.map((item) => (
-          <MediaCard key={item.id} item={item} />
+          <MediaCard
+            key={item.id}
+            item={item}
+            onOpen={onOpenItem}
+            onToggleWatchlist={onToggleWatchlist}
+            isInWatchlist={watchlist.some((entry) => entry.id === item.id)}
+          />
         ))}
       </section>
 
