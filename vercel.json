@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/imdb/:path*",
+      "destination": "https://api.imdbapi.dev/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
